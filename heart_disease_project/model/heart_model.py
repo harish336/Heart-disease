@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score
 from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
-import pickle, os
+import pickle
 df = pd.read_csv("dataset.csv")
 df.columns = df.columns.str.strip()
 X = df.drop("condition", axis=1)
@@ -18,7 +18,6 @@ model = RandomForestClassifier(
     random_state=42
 )
 model.fit(X_train, y_train)
-os.makedirs("model", exist_ok=True)
 with open("model/heart_model.pkl", "wb") as f:
     pickle.dump(model, f)
 train_pred = model.predict(X_train)
